@@ -107,7 +107,7 @@ function Hydraulics:PreTick(args)
 	if LocalPlayer:InVehicle() then
 		local vehicle = LocalPlayer:GetVehicle()
 
-		if vehicle:GetDriver() == LocalPlayer and #self.targetLengths > 0 and self.lastVehicle == vehicle then
+		if vehicle:GetDriver() == LocalPlayer and #self.targetLengths > 0 and IsValid(self.lastVehicle) and self.lastVehicle == vehicle then
 			local suspension = vehicle:GetSuspension()
 
 			for wheelIndex = 1, vehicle:GetWheelCount() do
