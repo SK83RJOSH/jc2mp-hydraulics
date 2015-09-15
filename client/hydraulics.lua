@@ -112,9 +112,11 @@ function Hydraulics:PreTick(args)
 
 			for wheelIndex = 1, vehicle:GetWheelCount() do
 				local length = suspension:GetLength(wheelIndex)
+				local defaultLength = self.defaultLengths[wheelIndex]
 				local targetLength = self.targetLengths[wheelIndex]
-
-				suspension:SetLength(wheelIndex, length + ((targetLength - length) * args.delta * 100))
+				local currentLength = length + ((targetLength - length) * args.delta * 100)
+				
+				suspension:SetLength(wheelIndex, math.max(math.min(currentLength, targetLength), defaultLength))
 			end
 		end
 	end
